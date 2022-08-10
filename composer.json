@@ -1,0 +1,23 @@
+{
+    "name": "ricardslazda/mapon-uzdevums",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        }
+    },
+    "require": {
+        "ext-pdo": "*",
+        "doctrine/orm": "*",
+        "symfony/cache": "^6.1",
+        "doctrine/migrations": "^3.5",
+        "phpunit/phpunit": "^9.5",
+        "twig/twig": "^2.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "config": {
+        "platform": {
+            "php": "8.1"
+        }
+    }
+}

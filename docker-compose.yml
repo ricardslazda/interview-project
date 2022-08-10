@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  php:
+    container_name: web-server-container-mapon
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html/
+
+  db_mysql:
+    container_name: mysql-container-mapon
+    image: mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      - MYSQL_DATABASE=mapon_db
+      - MYSQL_USER=mapon
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:

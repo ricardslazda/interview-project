@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <form action="/transactions" method="get">
+            <label for="from-filter">From:</label>
+            <input type="date" id="from-filter" name="from" value="{{ filters['from'] }}">
+
+            <label for="to-filter">To:</label>
+            <input type="date" id="to-filter" name="to" value="{{ filters['to'] }}">
+
+            <label for="fuel-card">Fuel card:</label>
+            <input type="text" id="fuel-card" name="fuelCard" value="{{ filters['fuelCard'] }}">
+
+            <label for="vehicle">Vehicle:</label>
+            <input type="text" id="vehicle" name="vehicle" value="{{ filters['vehicle']}}">
+
+            <label for="product-type">Product type:</label>
+            <select name="productType" id="product-type">
+                <option value="Diesel" {% if filters["productType"] == 'Diesel' %} selected {% endif %}>Diesel</option>
+                <option value="E95" {% if filters["productType"] == 'E95' %} selected {% endif %}>Gasoline, 95</option>
+                <option value="E98" {% if filters["productType"] == 'E98' %} selected {% endif %}>Gasoline, 98</option>
+                <option value="Electricity" {% if filters["productType"] == 'Electricity' %} selected {% endif %}>Electricity</option>
+                <option value="CNG" {% if filters["productType"] == 'CNG' %} selected {% endif %}>CNG (Compressed natural gas)</option>
+            </select>
+
+            <input type="submit" value="Filter" name="submit" class="btn btn-primary">
+        </form>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Date & time</th>
+                <th scope="col">Fuel card</th>
+                <th scope="col">Vehicle no.</th>
+                <th scope="col">Product type</th>
+                <th scope="col">Total amount filled</th>
+                <th scope="col">Total cost</th>
+                <th scope="col">Cost per liter/weight/unit (for CNG, Electricity)</th>
+                <th scope="col">Fuel station name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{transaction.date.format('Y-m-d H:i:s')}}</td>
+                <td>{{transaction.cardNumber}}</td>
+                <td>{{transaction.vehicleNumber}}</td>
+                <td>{{transaction.product}}</td>
+                <td>{{transaction.totalAmount}}</td>
+                <td>{{transaction.totalSum}}</td>
+                <td></td>
+                <td>{{transaction.fuelStation}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
