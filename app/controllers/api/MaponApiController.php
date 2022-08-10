@@ -16,7 +16,7 @@ class MaponApiController
     {
         $client = new Client();
 
-        $response = $client->request('GET', ' https://mapon.com/api/v1/unit_data/history_point.json', [
+        $response = $client->request('GET', 'https://mapon.com/api/v1/unit_data/history_point.json', [
             'query' => [
                 'key' => $_ENV["MAPON_API_KEY"],
                 'unit_id' => '199332',
@@ -28,7 +28,5 @@ class MaponApiController
                 ]
             ]
         ]);
-
-        print_r((string)$response->getBody());
     }
 }

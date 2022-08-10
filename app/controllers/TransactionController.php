@@ -13,7 +13,8 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-class TransactionController {
+class TransactionController
+{
     private TransactionService $transactionService;
     private TransactionRepository $transactionRepository;
 
@@ -41,9 +42,7 @@ class TransactionController {
      */
     function actionHandleTransactionUpload(): void
     {
-        if (isset($_FILES["fuelTransitions"])) {
-            $this->transactionService->saveFromCsv($_FILES["Path"]);
-        }
+        $this->transactionService->saveFromCsv($_FILES);
 
         header('Location: transactions');
     }
